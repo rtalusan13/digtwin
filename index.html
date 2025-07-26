@@ -17,6 +17,9 @@
             color: white;
             min-height: 100vh;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .background-pattern {
             position: fixed;
@@ -30,6 +33,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            flex: 1;
         }
         header {
             text-align: center;
@@ -60,7 +64,7 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: 30px;
+            gap: 50px; /* Increased horizontal spacing */
             min-height: 70vh;
             padding: 20px 0;
         }
@@ -170,6 +174,7 @@
         .click-power {
             text-align: center;
             margin-top: 25px;
+            margin-bottom: 20px; /* Added space below */
             color: #aaa;
             font-size: 0.9rem;
         }
@@ -262,10 +267,58 @@
             padding: 20px;
             color: #888;
             font-size: 0.9rem;
+            background: rgba(10, 10, 20, 0.7);
+            border-top: 1px solid rgba(255, 170, 0, 0.1);
+            margin-top: auto;
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+        .hearts {
+            display: flex;
+            gap: 4px;
+        }
+        .heart {
+            color: #ff6b9d;
+            animation: pulse 1.5s infinite;
+        }
+        .heart:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+        .heart:nth-child(3) {
+            animation-delay: 1s;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .footer-link {
+            color: #ffaa00;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-link:hover {
+            color: #ffb7c5;
+            text-decoration: underline;
         }
         @media (max-width: 768px) {
             .game-area {
                 flex-direction: column;
+                gap: 30px; /* Adjusted for mobile */
             }
             .peach-clicker {
                 width: 200px;
@@ -277,6 +330,10 @@
             .upgrades-panel, .visuals-panel {
                 width: 100%;
                 max-width: 400px;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
@@ -390,9 +447,23 @@
             </div>
         </div>
     </div>
-    <div class="footer-panel">
-            <p>keep digging twin ❤️❤️</p>
-    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-text">
+                keep digging twin 
+                <div class="hearts">
+                    <span class="heart">❤️</span>
+                    <span class="heart">❤️</span>
+                    <span class="heart">❤️</span>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">About</a>
+                <a href="#" class="footer-link">Privacy</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+        </div>
+    </footer>
     <script>
         // Game state
         let peaches = 0;
