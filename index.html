@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peach Empire</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <style>
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+        
+        .floating-notification {
+            animation: floatUp 1s forwards;
+        }
+        
+        .peach-button {
+            background: radial-gradient(circle at 30% 30%, #ffb7c5, #ff6b9d 70%, #ff4785);
+        }
+        
+        .bg-radial-pattern {
+            background-image: radial-gradient(circle at 50% 50%, rgba(255,218,185,0.1), transparent 50%);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 bg-radial-pattern"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="relative z-10 p-4 text-center">
+        <h1 id="title" class="text-3xl md:text-5xl font-bold bg-gradient-to-r from-orange-400 via-pink-400 to-red-400 bg-clip-text text-transparent mb-2 opacity-0 transform -translate-y-5 transition-all duration-800">
+            Peach Empire
+        </h1>
+        <div id="peach-count" class="text-2xl font-bold text-orange-400 opacity-0 transition-all duration-800 delay-300">
+            <span id="peaches">0</span> 
+        </div>
+        <div id="peach-rate" class="text-gray-300 text-sm hidden">
+            +<span id="rate-value">0</span> per second
+        </div>
+    </div>
+
+    <!-- Main Game Area -->
+    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-center min-h-[70vh] px-4 gap-6">
+        <!-- Visual Collection Area - Center -->
+        <div id="empire-display" class="flex-1 max-w-md bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/30 shadow-xl opacity-0 scale-90 transition-all duration-800 delay-300">
+            <h3 class="text-xl font-bold text-center mb-4 text-orange-300">Your Peach Empire</h3>
+            <div id="upgrades-owned" class="grid grid-cols-2 gap-4">
+                <div class="col-span-2 text-center text-gray-400 py-8">
+                    <div class="text-4xl mb-2">🍑</div>
+                    <p>Start buying upgrades to build your empire!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Peach Clicker - Center Focus -->
+        <div id="peach-clicker" class="relative opacity-0 scale-80 transition-all duration-800 delay-500">
+            <button id="peach-button" class="peach-button relative w-48 h-48 md:w-64 md:h-64 rounded-full shadow-2xl hover:shadow-pink-500/25 transition-all duration-200 focus:outline-none">
+                <span class="text-6xl md:text-8xl">🍑</span>
+            </button>
+            
+            <!-- Click Power Indicator -->
+            <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-center">
+                <div class="text-sm text-gray-300">
+                    Click Power: <span id="click-power">1</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upgrades Panel - Smaller Side Panel -->
+        <div id="upgrades-panel" class="w-80 bg-gray-800/50 backdrop-blur-sm rounded-2xl p-4 border border-gray-700/50 shadow-xl max-h-96 overflow-y-auto opacity-0 translate-x-5 transition-all duration-800 delay-700">
+            <h3 class="text-lg font-bold text-center mb-3 text-orange-300">Upgrades</h3>
+            <div id="upgrades-list" class="space-y-2">
+                <!-- Upgrades will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="relative z-10 text-center p-4 text-gray-400 text-sm">
+        <p>Keep digging for that perfect peach! </p>
+    </div>
+
+    <script>
+        // Game state
+        let state = {
+            peaches: 0,
+            peachRate: 0,
+            clickPower: 1,
+            upgrades: [
+                { id: 1, name: 'Digging for Twin', cost: 15, rate: 1, owned: 0, description: 'Search for that perfect peach match', emoji: '⛏️' },
+                { id: 2, name: 'Peach Picker', cost: 100, rate: 5, owned: 0, description: 'Hire someone to pick peaches for you', emoji: '👩‍🌾' },
+                { id: 3, name: 'Orchard Expansion', cost: 500, rate: 20, owned: 0, description: 'Expand your peach growing operation', emoji: '🌳' },
+                { id: 4, name: 'Peach Processing Plant', cost: 2000, rate: 80, owned: 0, description: 'Automate peach production', emoji: '🏭' },
+                { id: 5, name: 'Peach Empire', cost: 10000, rate: 400, owned: 0, description: 'Dominate the global peach market', emoji: '🏰' }
+            ],
+            notifications: []
+        };
+
+        // DOM elements
+        const elements = {
+            title: document.getElementById('title'),
+            peachCount: document.getElementById('peach-count'),
+            peaches: document.getElementById('peaches'),
+            peachRate: document.getElementById('peach-rate'),
+            rateValue: document.getElementById('rate-value'),
+            empireDisplay: document.getElementById('empire-display'),
+            upgradesOwned: document.getElementById('upgrades-owned'),
+            peachClicker: document.getElementById('peach-clicker'),
+            peachButton: document.getElementById('peach-button'),
+            clickPower: document.getElementById('click-power'),
+            upgradesPanel: document.getElementById('upgrades-panel'),
+            upgradesList: document.getElementById('upgrades-list')
+        };
+
+        // Initialize animations
+        function initAnimations() {
+            elements.title.classList.remove('opacity-0', '-translate-y-5');
+            elements.peachCount.classList.remove('opacity-0');
+            elements.empireDisplay.classList.remove('opacity-0', 'scale-90');
+            elements.peachClicker.classList.remove('opacity-0', 'scale-80');
+            elements.upgradesPanel.classList.remove('opacity-0', 'translate-x-5');
+        }
+
+        // Format numbers for display
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+
+        // Update the UI
+        function updateUI() {
+            // Update peach count
+            elements.peaches.textContent = formatNumber(state.peaches);
+            
+            // Update peach rate
+            if (state.peachRate > 0) {
+                elements.peachRate.classList.remove('hidden');
+                elements.rateValue.textContent = state.peachRate;
+            } else {
+                elements.peachRate.classList.add('hidden');
+            }
+            
+            // Update click power
+            elements.clickPower.textContent = state.clickPower;
+            
+            // Update owned upgrades
+            updateOwnedUpgrades();
+        }
+
+        // Update the owned upgrades display
+        function updateOwnedUpgrades() {
+            const ownedUpgrades = state.upgrades.filter(upgrade => upgrade.owned > 0);
+            
+            if (ownedUpgrades.length === 0) {
+                elements.upgradesOwned.innerHTML = `
+                    <div class="col-span-2 text-center text-gray-400 py-8">
+                        <div class="text-4xl mb-2">🍑</div>
+                        <p>Start buying upgrades to build your empire!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            ownedUpgrades.forEach((upgrade, index) => {
+                html += `
+                    <div class="bg-gray-700/50 rounded-lg p-3 text-center border border-gray-600/30" style="transition-delay: ${0.1 * upgrade.owned}s">
+                        <div class="text-2xl mb-1">${upgrade.emoji}</div>
+                        <div class="text-sm font-semibold text-orange-300">${upgrade.name}</div>
+                        <div class="text-xs text-gray-300">Owned: ${upgrade.owned}</div>
+                    </div>
+                `;
+            });
+            
+            elements.upgradesOwned.innerHTML = html;
+        }
+
+        // Render upgrades list
+        function renderUpgradesList() {
+            let html = '';
+            state.upgrades.forEach(upgrade => {
+                const canAfford = state.peaches >= upgrade.cost;
+                html += `
+                    <button 
+                        data-id="${upgrade.id}" 
+                        class="w-full p-3 rounded-lg border transition-all duration-200 text-left ${
+                            canAfford 
+                                ? 'bg-gray-700/50 border-orange-500/30 hover:border-orange-500 hover:bg-gray-700 cursor-pointer' 
+                                : 'bg-gray-900/30 border-gray-600/30 cursor-not-allowed opacity-60'
+                        }"
+                        ${!canAfford ? 'disabled' : ''}
+                    >
+                        <div class="flex justify-between items-start mb-1">
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg">${upgrade.emoji}</span>
+                                <div>
+                                    <div class="font-semibold text-sm">${upgrade.name}</div>
+                                    <div class="text-xs text-gray-400">${upgrade.owned} owned</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-orange-400 font-bold text-sm">${formatNumber(upgrade.cost)} </div>
+                                <div class="text-xs text-green-400">+${upgrade.rate}/sec</div>
+                            </div>
+                        </div>
+                    </button>
+                `;
+            });
+            
+            elements.upgradesList.innerHTML = html;
+            
+            // Add event listeners to upgrade buttons
+            document.querySelectorAll('#upgrades-list button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const upgradeId = parseInt(button.dataset.id);
+                    buyUpgrade(upgradeId);
+                });
+            });
+        }
+
+        // Handle peach click
+        function handlePeachClick() {
+            state.peaches += state.clickPower;
+            
+            // Create notification
+            const notification = document.createElement('div');
+            notification.className = 'floating-notification absolute text-xl md:text-2xl font-bold text-yellow-300 pointer-events-none';
+            notification.style.left = `${Math.random() * 100 + 25}%`;
+            notification.style.top = `${Math.random() * 100 + 25}%`;
+            notification.textContent = `+${state.clickPower}`;
+            
+            elements.peachButton.appendChild(notification);
+            
+            // Remove notification after animation
+            setTimeout(() => {
+                notification.remove();
+            }, 1000);
+            
+            updateUI();
+        }
+
+        // Buy upgrade
+        function buyUpgrade(upgradeId) {
+            const upgrade = state.upgrades.find(u => u.id === upgradeId);
+            
+            if (state.peaches >= upgrade.cost) {
+                state.peaches -= upgrade.cost;
+                
+                // Update upgrade
+                const upgradeIndex = state.upgrades.findIndex(u => u.id === upgradeId);
+                state.upgrades[upgradeIndex].owned += 1;
+                state.upgrades[upgradeIndex].cost = Math.floor(state.upgrades[upgradeIndex].cost * 1.5);
+                
+                // Update rates and click power
+                state.peachRate += upgrade.rate;
+                if (upgradeId === 1) {
+                    state.clickPower += 1;
+                }
+                
+                updateUI();
+                renderUpgradesList();
+            }
+        }
+
+        // Auto-generate peaches
+        function startPeachGeneration() {
+            if (state.peachRate > 0) {
+                setInterval(() => {
+                    state.peaches += state.peachRate;
+                    updateUI();
+                }, 1000);
+            }
+        }
+
+        // Initialize the game
+        function initGame() {
+            initAnimations();
+            renderUpgradesList();
+            updateUI();
+            startPeachGeneration();
+            
+            // Add event listeners
+            elements.peachButton.addEventListener('click', handlePeachClick);
+            
+            // Add hover effects
+            elements.peachButton.addEventListener('mouseenter', () => {
+                elements.peachButton.classList.add('scale-105');
+            });
+            
+            elements.peachButton.addEventListener('mouseleave', () => {
+                elements.peachButton.classList.remove('scale-105');
+            });
+            
+            elements.peachButton.addEventListener('mousedown', () => {
+                elements.peachButton.classList.add('scale-95');
+            });
+            
+            elements.peachButton.addEventListener('mouseup', () => {
+                elements.peachButton.classList.remove('scale-95');
+            });
+        }
+
+        // Start the game when the page loads
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>
