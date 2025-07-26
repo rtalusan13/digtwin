@@ -354,6 +354,7 @@
     </style>
 </head>
 <body>
+    <script src="savegame.js"></script> <!-- access savegame.js for cookies script -->
     <div class="background-pattern"></div>
     <div class="container">
         <header>
@@ -507,6 +508,17 @@
             return num.toString();
         }
         // Update display
+
+      const loaded = loadGame();
+if (loaded) {
+    peaches = loaded.peaches || 0;
+    clickPower = loaded.clickPower || 1;
+    peachRate = loaded.peachRate || 0;
+    if (Array.isArray(loaded.upgradeData)) {
+        upgradeData = loaded.upgradeData;
+    }
+}
+          
         function updateDisplay() {
             peachCounter.textContent = formatNumber(peaches) + ' 🍑';
             if (peachRate > 0) {
@@ -517,6 +529,7 @@
             clickPowerDisplay.textContent = 'Click Power: ' + clickPower;
             // Update upgrade item states
             updateUpgradeStates();
+            saveGame(peaches, clickPower, peachRate, upgradeData);
         }
         // Update upgrade states (enable/disable based on cost)
         function updateUpgradeStates() {
