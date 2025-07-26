@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
@@ -19,14 +18,12 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
-
         .background-pattern {
             position: fixed;
             inset: 0;
             background: radial-gradient(circle at 50% 50%, rgba(255, 218, 185, 0.1), transparent 50%);
             pointer-events: none;
         }
-
         .container {
             position: relative;
             z-index: 10;
@@ -34,12 +31,10 @@
             margin: 0 auto;
             padding: 20px;
         }
-
         header {
             text-align: center;
             padding: 20px 0;
         }
-
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
@@ -49,20 +44,17 @@
             color: transparent;
             font-weight: 800;
         }
-
         .peach-counter {
             font-size: 1.8rem;
             font-weight: bold;
             color: #ffaa00;
             margin: 10px 0;
         }
-
         .rate-counter {
             color: #aaa;
             font-size: 1rem;
             margin-bottom: 20px;
         }
-
         .game-area {
             display: flex;
             flex-wrap: wrap;
@@ -72,7 +64,6 @@
             min-height: 70vh;
             padding: 20px 0;
         }
-
         .visuals-panel {
             flex: 1;
             min-width: 300px;
@@ -84,7 +75,6 @@
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-
         .panel-title {
             text-align: center;
             font-size: 1.3rem;
@@ -92,13 +82,11 @@
             margin-bottom: 20px;
             font-weight: 600;
         }
-
         .empire-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
-
         .empire-item {
             background: rgba(50, 50, 70, 0.5);
             border: 1px solid rgba(128, 128, 128, 0.2);
@@ -107,41 +95,34 @@
             text-align: center;
             transition: transform 0.2s ease;
         }
-
         .empire-item:hover {
             transform: translateY(-2px);
         }
-
         .item-emoji {
             font-size: 2rem;
             margin-bottom: 8px;
         }
-
         .item-name {
             font-size: 0.9rem;
             font-weight: 600;
             color: #ffaa00;
             margin-bottom: 5px;
         }
-
         .item-count {
             font-size: 0.8rem;
             color: #aaa;
         }
-
         .empty-empire {
             grid-column: span 2;
             text-align: center;
             color: #888;
             padding: 30px 0;
         }
-
         .peach-clicker {
             position: relative;
             width: 250px;
             height: 250px;
         }
-
         .peach-button {
             width: 100%;
             height: 100%;
@@ -154,16 +135,13 @@
             position: relative;
             overflow: hidden;
         }
-
         .peach-button:hover {
             transform: scale(1.05);
             box-shadow: 0 20px 40px rgba(255, 107, 157, 0.6);
         }
-
         .peach-button:active {
             transform: scale(0.95);
         }
-
         .peach-emoji {
             font-size: 5rem;
             position: absolute;
@@ -171,7 +149,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-
         .notification {
             position: absolute;
             color: #ffdd00;
@@ -180,7 +157,6 @@
             pointer-events: none;
             animation: floatUp 1s ease-out forwards;
         }
-
         @keyframes floatUp {
             0% {
                 opacity: 1;
@@ -191,14 +167,12 @@
                 transform: translate(-50%, -150%);
             }
         }
-
         .click-power {
             text-align: center;
             margin-top: 25px;
             color: #aaa;
             font-size: 0.9rem;
         }
-
         .upgrades-panel {
             width: 320px;
             background: rgba(30, 30, 46, 0.5);
@@ -209,8 +183,14 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             max-height: 400px;
             overflow-y: auto;
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            scrollbar-width: none; /* For Firefox */
+            -ms-overflow-style: none; /* For Internet Explorer and Edge */
         }
-
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .upgrades-panel::-webkit-scrollbar {
+            display: none;
+        }
         .upgrades-title {
             text-align: center;
             font-size: 1.3rem;
@@ -218,7 +198,6 @@
             margin-bottom: 15px;
             font-weight: 600;
         }
-
         .upgrade-item {
             background: rgba(50, 50, 70, 0.5);
             border: 1px solid rgba(128, 128, 128, 0.2);
@@ -228,90 +207,73 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
         .upgrade-item:hover {
             background: rgba(70, 70, 90, 0.5);
             border-color: rgba(255, 170, 0, 0.3);
         }
-
         .upgrade-item.disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-
         .upgrade-item.disabled:hover {
             background: rgba(50, 50, 70, 0.5);
             border-color: rgba(128, 128, 128, 0.2);
         }
-
         .upgrade-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 8px;
         }
-
         .upgrade-info {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-
         .upgrade-emoji {
             font-size: 1.5rem;
         }
-
         .upgrade-text {
             flex: 1;
         }
-
         .upgrade-name {
             font-weight: 600;
             font-size: 0.95rem;
             margin-bottom: 3px;
         }
-
         .upgrade-owned {
             font-size: 0.8rem;
             color: #888;
         }
-
         .upgrade-cost {
             text-align: right;
         }
-
         .cost-amount {
             color: #ffaa00;
             font-weight: bold;
             font-size: 0.9rem;
         }
-
         .rate-bonus {
             font-size: 0.75rem;
             color: #4ade80;
         }
-
         footer {
             text-align: center;
             padding: 20px;
             color: #888;
             font-size: 0.9rem;
         }
-
         @media (max-width: 768px) {
             .game-area {
                 flex-direction: column;
             }
-            
             .peach-clicker {
                 width: 200px;
                 height: 200px;
             }
-            
             .peach-emoji {
                 font-size: 4rem;
             }
-            
             .upgrades-panel, .visuals-panel {
                 width: 100%;
                 max-width: 400px;
@@ -321,14 +283,12 @@
 </head>
 <body>
     <div class="background-pattern"></div>
-    
     <div class="container">
         <header>
             <h1>Start Digging for Twin</h1>
             <div class="peach-counter">0 🍑</div>
             <div class="rate-counter"></div>
         </header>
-
         <div class="game-area">
             <!-- Visual Collection Area -->
             <div class="visuals-panel">
@@ -340,7 +300,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Peach Clicker -->
             <div class="peach-clicker">
                 <button class="peach-button" id="peachButton">
@@ -348,7 +307,6 @@
                 </button>
                 <div class="click-power">Click Power: 1</div>
             </div>
-
             <!-- Upgrades Panel -->
             <div class="upgrades-panel">
                 <h2 class="upgrades-title">Upgrades</h2>
@@ -431,12 +389,10 @@
                 </div>
             </div>
         </div>
-
         <footer>
             <p>keep digging twin ❤️❤️</p>
         </footer>
     </div>
-
     <script>
         // Game state
         let peaches = 0;
@@ -450,7 +406,6 @@
             { id: 4, name: 'Peach Processing Plant', cost: 2000, rate: 80, owned: 0, emoji: '🏭' },
             { id: 5, name: 'Peach Empire', cost: 10000, rate: 400, owned: 0, emoji: '🏰' }
         ];
-
         // DOM elements
         const peachButton = document.getElementById('peachButton');
         const peachCounter = document.querySelector('.peach-counter');
@@ -458,14 +413,12 @@
         const clickPowerDisplay = document.querySelector('.click-power');
         const upgradeItems = document.querySelectorAll('.upgrade-item');
         const empireGrid = document.querySelector('.empire-grid');
-
         // Format large numbers
         function formatNumber(num) {
             if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
             if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
             return num.toString();
         }
-
         // Update display
         function updateDisplay() {
             peachCounter.textContent = formatNumber(peaches) + ' 🍑';
@@ -475,24 +428,19 @@
                 rateCounter.textContent = '';
             }
             clickPowerDisplay.textContent = 'Click Power: ' + clickPower;
-            
             // Update upgrade item states
             updateUpgradeStates();
         }
-
         // Update upgrade states (enable/disable based on cost)
         function updateUpgradeStates() {
             upgradeItems.forEach(item => {
                 const id = parseInt(item.dataset.id);
                 const upgrade = upgradeData.find(u => u.id === id);
-                
                 if (upgrade) {
                     const costElement = item.querySelector('.cost-amount');
                     const ownedElement = item.querySelector('.upgrade-owned');
-                    
                     costElement.textContent = formatNumber(upgrade.cost) + ' 🍑';
                     ownedElement.textContent = upgrade.owned + ' owned';
-                    
                     if (peaches >= upgrade.cost) {
                         item.classList.remove('disabled');
                     } else {
@@ -501,15 +449,12 @@
                 }
             });
         }
-
         // Update empire visualization
         function updateEmpire() {
             // Clear current items
             empireGrid.innerHTML = '';
-            
             // Check if any upgrades are owned
             const ownedUpgrades = upgradeData.filter(u => u.owned > 0);
-            
             if (ownedUpgrades.length === 0) {
                 empireGrid.innerHTML = `
                     <div class="empty-empire">
@@ -519,7 +464,6 @@
                 `;
                 return;
             }
-            
             // Add owned upgrades to grid
             ownedUpgrades.forEach(upgrade => {
                 const itemElement = document.createElement('div');
@@ -532,7 +476,6 @@
                 empireGrid.appendChild(itemElement);
             });
         }
-
         // Create floating notification
         function createNotification(x, y, text) {
             const notification = document.createElement('div');
@@ -540,46 +483,37 @@
             notification.textContent = '+' + text;
             notification.style.left = x + 'px';
             notification.style.top = y + 'px';
-            
             document.querySelector('.peach-clicker').appendChild(notification);
-            
             // Remove after animation
             setTimeout(() => {
                 notification.remove();
             }, 1000);
         }
-
         // Handle peach click
         peachButton.addEventListener('click', function(e) {
             peaches += clickPower;
             updateDisplay();
-            
             // Create floating notification
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             createNotification(x, y, clickPower);
         });
-
         // Handle upgrade purchases
         function buyUpgrade(id) {
             const upgrade = upgradeData.find(u => u.id === id);
-            
             if (peaches >= upgrade.cost) {
                 peaches -= upgrade.cost;
                 upgrade.owned++;
                 upgrade.cost = Math.floor(upgrade.cost * 1.5);
                 peachRate += upgrade.rate;
-                
                 if (id === 1) {
                     clickPower++;
                 }
-                
                 updateDisplay();
                 updateEmpire();
             }
         }
-
         // Add event listeners to upgrade items
         upgradeItems.forEach(item => {
             item.addEventListener('click', function() {
@@ -589,7 +523,6 @@
                 }
             });
         });
-
         // Auto-generate peaches
         setInterval(() => {
             if (peachRate > 0) {
@@ -597,11 +530,9 @@
                 updateDisplay();
             }
         }, 1000);
-
         // Initialize display
         updateDisplay();
         updateEmpire();
     </script>
 </body>
 </html>
-```
