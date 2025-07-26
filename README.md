@@ -1,2 +1,2 @@
 # digtwin
-sdiybt - JavaScript
+sdiybt; cookie clicker-esque game made with HTML
