@@ -1,0 +1,7 @@
+# Updates & Patches
+## 7/27/25
+Included new entities, scaled progression to set up for upgrades (more patches will decrease rates)
+## 7/26/25
+Built and Launched!
+- Incorporated Cookies to save user data on devices for 30 days.
+- Updated visuals, graphics, and functionality on mobile devices.
