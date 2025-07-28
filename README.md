@@ -1,4 +1,4 @@
-# digtwin
+# DigTwin
 sdiybt; cookie clicker-esque game made with HTML
 
 
