@@ -1,6 +1,7 @@
 # Updates & Patches
 ## 7/27/25
-Included new entities, scaled progression to set up for upgrades (more patches will decrease rates)
+- Renamed "Upgrades" to "Entities" across all files, to make way for modifiers/upgrades that can be bought separate of entities
+- Included new entities, scaled progression to set up for upgrades (more patches will decrease rates)
 - COOKIES RESET #1
 ## 7/26/25
 Built and Launched!
