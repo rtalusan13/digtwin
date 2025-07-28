@@ -193,7 +193,7 @@
             color: #aaa;
             font-size: 0.9rem;
         }
-        .upgrades-panel {
+        .entities-panel {
             width: 320px;
             background: rgba(30, 30, 46, 0.5);
             backdrop-filter: blur(10px);
@@ -208,17 +208,17 @@
             -ms-overflow-style: none; /* For Internet Explorer and Edge */
         }
         /* Hide scrollbar for Chrome, Safari and Opera */
-        .upgrades-panel::-webkit-scrollbar {
+        .entities-panel::-webkit-scrollbar {
             display: none;
         }
-        .upgrades-title {
+        .entities-title {
             text-align: center;
             font-size: 1.3rem;
             color: #ffaa00;
             margin-bottom: 15px;
             font-weight: 600;
         }
-        .upgrade-item {
+        .entity-item {
             background: rgba(50, 50, 70, 0.5);
             border: 1px solid rgba(128, 128, 128, 0.2);
             border-radius: 12px;
@@ -227,45 +227,45 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        .upgrade-item:hover {
+        .entity-item:hover {
             background: rgba(70, 70, 90, 0.5);
             border-color: rgba(255, 170, 0, 0.3);
         }
-        .upgrade-item.disabled {
+        .entity-item.disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-        .upgrade-item.disabled:hover {
+        .entity-item.disabled:hover {
             background: rgba(50, 50, 70, 0.5);
             border-color: rgba(128, 128, 128, 0.2);
         }
-        .upgrade-header {
+        .entity-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 8px;
         }
-        .upgrade-info {
+        .entity-info {
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .upgrade-emoji {
+        .entity-emoji {
             font-size: 1.5rem;
         }
-        .upgrade-text {
+        .entity-text {
             flex: 1;
         }
-        .upgrade-name {
+        .entity-name {
             font-weight: 600;
             font-size: 0.95rem;
             margin-bottom: 3px;
         }
-        .upgrade-owned {
+        .entity-owned {
             font-size: 0.8rem;
             color: #888;
         }
-        .upgrade-cost {
+        .entity-cost {
             text-align: right;
         }
         .cost-amount {
@@ -342,7 +342,7 @@
             .peach-emoji {
                 font-size: 4rem;
             }
-            .upgrades-panel, .visuals-panel {
+            .entities-panel, .visuals-panel {
                 width: 100%;
                 max-width: 400px;
             }
@@ -369,7 +369,7 @@
                 <div class="empire-grid">
                     <div class="empty-empire">
                         <div style="font-size: 3rem; margin-bottom: 10px;">🍑</div>
-                        <p>Start buying goons to build your empire!</p>
+                        <p>Start buying entities to build your empire!</p>
                     </div>
                 </div>
             </div>
@@ -380,85 +380,160 @@
                     <span class="peach-emoji">🍑</span>
                 </button>
             </div>
-            <!-- Upgrades Panel -->
-            <div class="upgrades-panel">
-                <h2 class="upgrades-title">Upgrades</h2>
-                <div class="upgrade-list">
-                    <div class="upgrade-item" data-id="1">
-                        <div class="upgrade-header">
-                            <div class="upgrade-info">
-                                <span class="upgrade-emoji">⛏️</span>
-                                <div class="upgrade-text">
-                                    <div class="upgrade-name">sponbob</div>
-                                    <div class="upgrade-owned">0 owned</div>
+            <!-- Entities Panel -->
+            <div class="entities-panel">
+                <h2 class="entities-title">Entities</h2>
+                <div class="entity-list">
+                    <div class="entity-item" data-id="1">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">⛏️</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">sponbob hair</div>
+                                    <div class="entity-owned">0 owned</div>
                                 </div>
                             </div>
-                            <div class="upgrade-cost">
-                                <div class="cost-amount">15 🍑</div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">50 🍑</div>
                                 <div class="rate-bonus">+1/sec</div>
                             </div>
                         </div>
                     </div>
-                    <div class="upgrade-item" data-id="2">
-                        <div class="upgrade-header">
-                            <div class="upgrade-info">
-                                <span class="upgrade-emoji">🦀</span>
-                                <div class="upgrade-text">
-                                    <div class="upgrade-name">mr krabs</div>
-                                    <div class="upgrade-owned">0 owned</div>
+                    <div class="entity-item" data-id="2">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🦀</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">mr krabs</div>
+                                    <div class="entity-owned">0 owned</div>
                                 </div>
                             </div>
-                            <div class="upgrade-cost">
-                                <div class="cost-amount">100 🍑</div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">300 🍑</div>
                                 <div class="rate-bonus">+5/sec</div>
                             </div>
                         </div>
                     </div>
-                    <div class="upgrade-item" data-id="3">
-                        <div class="upgrade-header">
-                            <div class="upgrade-info">
-                                <span class="upgrade-emoji">💚</span>
-                                <div class="upgrade-text">
-                                    <div class="upgrade-name">plankton miner</div>
-                                    <div class="upgrade-owned">0 owned</div>
+                    <div class="entity-item" data-id="3">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">💚</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">plankton miner</div>
+                                    <div class="entity-owned">0 owned</div>
                                 </div>
                             </div>
-                            <div class="upgrade-cost">
-                                <div class="cost-amount">500 🍑</div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">1500 🍑</div>
                                 <div class="rate-bonus">+20/sec</div>
                             </div>
                         </div>
                     </div>
-                    <div class="upgrade-item" data-id="4">
-                        <div class="upgrade-header">
-                            <div class="upgrade-info">
-                                <span class="upgrade-emoji">🐿️</span>
-                                <div class="upgrade-text">
-                                    <div class="upgrade-name">sandy cheeks</div>
-                                    <div class="upgrade-owned">0 owned</div>
+                    <div class="entity-item" data-id="4">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🐿️</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">sandy cheeks</div>
+                                    <div class="entity-owned">0 owned</div>
                                 </div>
                             </div>
-                            <div class="upgrade-cost">
-                                <div class="cost-amount">2,000 🍑</div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">10,000 🍑</div>
                                 <div class="rate-bonus">+80/sec</div>
                             </div>
                         </div>
                     </div>
-                    <div class="upgrade-item" data-id="5">
-                        <div class="upgrade-header">
-                            <div class="upgrade-info">
-                                <span class="upgrade-emoji">🦑</span>
-                                <div class="upgrade-text">
-                                    <div class="upgrade-name">SQUIDWARD</div>
-                                    <div class="upgrade-owned">0 owned</div>
+                    <div class="entity-item" data-id="5">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🦑</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">SQUIDWARD</div>
+                                    <div class="entity-owned">0 owned</div>
                                 </div>
                             </div>
-                            <div class="upgrade-cost">
-                                <div class="cost-amount">10,000 🍑</div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">100,000 🍑</div>
                                 <div class="rate-bonus">+400/sec</div>
                             </div>
                         </div>
+                    </div> 
+                    <div class="entity-item" data-id="6">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🦞</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">larry the lobster</div>
+                                    <div class="entity-owned">0 owned</div>
+                                </div>
+                            </div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">2,000,000 🍑</div>
+                                <div class="rate-bonus">+3,000/sec</div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="entity-item" data-id="7">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">⭐</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">patrik</div>
+                                    <div class="entity-owned">0 owned</div>
+                                </div>
+                            </div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">15,000,000 🍑</div>
+                                <div class="rate-bonus">+6,000/sec</div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="entity-item" data-id="8">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🖥️</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">karen</div>
+                                    <div class="entity-owned">0 owned</div>
+                                </div>
+                            </div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">450,000,000 🍑</div>
+                                <div class="rate-bonus">+79,000/sec</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="entity-item" data-id="9">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🐌</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">garysnail</div>
+                                    <div class="entity-owned">0 owned</div>
+                                </div>
+                            </div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">6,700,000,000 🍑</div>
+                                <div class="rate-bonus">+676,869/sec</div>
+                            </div>
+                        </div>
+                    </div>
+<!-- format new     <div class="entity-item" data-id="5">
+                        <div class="entity-header">
+                            <div class="entity-info">
+                                <span class="entity-emoji">🐿️</span>
+                                <div class="entity-text">
+                                    <div class="entity-name">sandy cheeks</div>
+                                    <div class="entity-owned">0 owned</div>
+                                </div>
+                            </div>
+                            <div class="entity-cost">
+                                <div class="cost-amount">2,000 🍑</div>
+                                <div class="rate-bonus">+80/sec</div>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -487,19 +562,23 @@
         let peachRate = 0;
         let clickPower = 1;
         let notifications = [];
-        let upgradeData = [
-            { id: 1, name: 'sponbob', cost: 15, rate: 1, owned: 0, emoji: '⛏️' },
-            { id: 2, name: 'mr krabs', cost: 100, rate: 5, owned: 0, emoji: '🦀' },
-            { id: 3, name: 'plankton miner', cost: 500, rate: 20, owned: 0, emoji: '💚' },
-            { id: 4, name: 'sandy cheeks', cost: 2000, rate: 80, owned: 0, emoji: '🐿️' },
-            { id: 5, name: 'SQUIDWARD', cost: 10000, rate: 400, owned: 0, emoji: '🦑' }
+        let entityData = [
+            { id: 1, name: 'sponbob hair', cost: 50, rate: 1, owned: 0, emoji: '⛏️' },
+            { id: 2, name: 'mr krabs', cost: 300, rate: 5, owned: 0, emoji: '🦀' },
+            { id: 3, name: 'plankton miner', cost: 1500, rate: 20, owned: 0, emoji: '💚' },
+            { id: 4, name: 'sandy cheeks', cost: 10000, rate: 80, owned: 0, emoji: '🐿️' },
+            { id: 5, name: 'SQUIDWARD', cost: 100000, rate: 400, owned: 0, emoji: '🦑' },
+            { id: 6, name: 'larry the lobster', cost: 2000000, rate: 3000, owned: 0, emoji: '🦞' },
+            { id: 7, name: 'patrik', cost: 15000000, rate: 6000, owned: 0, emoji: '⭐' },
+            { id: 8, name: 'karen', cost: 450000000, rate: 79000, owned: 0, emoji: '🖥️' },
+            { id: 9, name: 'garysnail', cost: 6700000000, rate: 676869, owned: 0, emoji: '🐌' }
         ];
         // DOM elements
         const peachButton = document.getElementById('peachButton');
         const peachCounter = document.querySelector('.peach-counter');
         const rateCounter = document.querySelector('.rate-counter');
         const clickPowerDisplay = document.querySelector('.click-power');
-        const upgradeItems = document.querySelectorAll('.upgrade-item');
+        const entityItems = document.querySelectorAll('.entity-item');
         const empireGrid = document.querySelector('.empire-grid');
         // Format large numbers
         function formatNumber(num) {
@@ -514,8 +593,8 @@ if (loaded) {
     peaches = loaded.peaches || 0;
     clickPower = loaded.clickPower || 1;
     peachRate = loaded.peachRate || 0;
-    if (Array.isArray(loaded.upgradeData)) {
-        upgradeData = loaded.upgradeData;
+    if (Array.isArray(loaded.entityData)) {
+        entityData = loaded.entityData;
     }
 }
           
@@ -527,21 +606,21 @@ if (loaded) {
                 rateCounter.textContent = '';
             }
             clickPowerDisplay.textContent = 'Click Power: ' + clickPower;
-            // Update upgrade item states
-            updateUpgradeStates();
-            saveGame(peaches, clickPower, peachRate, upgradeData);
+            // Update entity item states
+            updateStates();
+            saveGame(peaches, clickPower, peachRate, entityData);
         }
-        // Update upgrade states (enable/disable based on cost)
-        function updateUpgradeStates() {
-            upgradeItems.forEach(item => {
+        // Update entity states (enable/disable based on cost)
+        function updateEntityStates() {
+            entityItems.forEach(item => {
                 const id = parseInt(item.dataset.id);
-                const upgrade = upgradeData.find(u => u.id === id);
-                if (upgrade) {
+                const entity = entityData.find(u => u.id === id);
+                if (entity) {
                     const costElement = item.querySelector('.cost-amount');
-                    const ownedElement = item.querySelector('.upgrade-owned');
-                    costElement.textContent = formatNumber(upgrade.cost) + ' 🍑';
-                    ownedElement.textContent = upgrade.owned + ' owned';
-                    if (peaches >= upgrade.cost) {
+                    const ownedElement = item.querySelector('.entity-owned');
+                    costElement.textContent = formatNumber(entity.cost) + ' 🍑';
+                    ownedElement.textContent = entity.owned + ' owned';
+                    if (peaches >= entity.cost) {
                         item.classList.remove('disabled');
                     } else {
                         item.classList.add('disabled');
@@ -553,25 +632,25 @@ if (loaded) {
         function updateEmpire() {
             // Clear current items
             empireGrid.innerHTML = '';
-            // Check if any upgrades are owned
-            const ownedUpgrades = upgradeData.filter(u => u.owned > 0);
-            if (ownedUpgrades.length === 0) {
+            // Check if any entities are owned
+            const ownedEntities = entityData.filter(u => u.owned > 0);
+            if (ownedEntities.length === 0) {
                 empireGrid.innerHTML = `
                     <div class="empty-empire">
                         <div style="font-size: 3rem; margin-bottom: 10px;">🍑</div>
-                        <p>Start buying upgrades to build your empire!</p>
+                        <p>Start buying entities to build your empire!</p>
                     </div>
                 `;
                 return;
             }
-            // Add owned upgrades to grid
-            ownedUpgrades.forEach(upgrade => {
+            // Add owned entities to grid
+            ownedEntities.forEach(entity => {
                 const itemElement = document.createElement('div');
                 itemElement.className = 'empire-item';
                 itemElement.innerHTML = `
-                    <div class="item-emoji">${upgrade.emoji}</div>
-                    <div class="item-name">${upgrade.name}</div>
-                    <div class="item-count">Owned: ${upgrade.owned}</div>
+                    <div class="item-emoji">${entity.emoji}</div>
+                    <div class="item-name">${entity.name}</div>
+                    <div class="item-count">Owned: ${entity.owned}</div>
                 `;
                 empireGrid.appendChild(itemElement);
             });
@@ -599,14 +678,14 @@ if (loaded) {
             const y = e.clientY - rect.top;
             createNotification(x, y, clickPower);
         });
-        // Handle upgrade purchases
-        function buyUpgrade(id) {
-            const upgrade = upgradeData.find(u => u.id === id);
-            if (peaches >= upgrade.cost) {
-                peaches -= upgrade.cost;
-                upgrade.owned++;
-                upgrade.cost = Math.floor(upgrade.cost * 1.9);
-                peachRate += upgrade.rate;
+        // Handle entity purchases
+        function buyEntity(id) {
+            const entity = entityData.find(u => u.id === id);
+            if (peaches >= entity.cost) {
+                peaches -= entity.cost;
+                entity.owned++;
+                entity.cost = Math.floor(entity.cost * 1.9);
+                peachRate += entity.rate;
                 if (id === 1) {
                     clickPower++;
                 }
@@ -614,12 +693,12 @@ if (loaded) {
                 updateEmpire();
             }
         }
-        // Add event listeners to upgrade items
-        upgradeItems.forEach(item => {
+        // Add event listeners to entity items
+        entityItems.forEach(item => {
             item.addEventListener('click', function() {
                 if (!this.classList.contains('disabled')) {
                     const id = parseInt(this.dataset.id);
-                    buyUpgrade(id);
+                    buyEntity(id);
                 }
             });
         });
