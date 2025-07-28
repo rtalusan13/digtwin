@@ -1,5 +1,5 @@
 # DigTwin
-sdiybt; cookie clicker-esque game made with HTML
+sdiybt; cookie clicker game made with HTML & JavaScript | this project serves as my introduction into product and feature engineering, specifically for user-focused apps like games
 
 
 ## future ideas
