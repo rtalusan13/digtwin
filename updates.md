@@ -6,3 +6,4 @@ Included new entities, scaled progression to set up for upgrades (more patches w
 Built and Launched!
 - Incorporated Cookies to save user data on devices for 30 days.
 - Updated visuals, graphics, and functionality on mobile devices.
+- Fixed footer to bottom of webpage.
