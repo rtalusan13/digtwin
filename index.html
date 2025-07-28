@@ -354,7 +354,32 @@
     </style>
 </head>
 <body>
-    <script src="savegame.js"></script> <!-- access savegame.js for cookies script -->
+      
+      <script>
+  (function resetCookiesOnce() {
+    const CURRENT_VERSION = "reset-2025-07-26"; // can reset cookies by changing this date, after an update
+    const storedVersion = localStorage.getItem("cookie_version");
+
+    if (storedVersion !== CURRENT_VERSION) {
+      // Clear all accessible cookies
+      localStorage.clear(); // Optional: clear all localStorage keys
+      sessionStorage.clear(); // Optional: clear sessionStorage too    
+      const cookies = document.cookie.split(";");
+      for (let cookie of cookies) {
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substring(0, eqPos).trim() : cookie.trim();
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/";
+      }
+
+      // Save version so this doesn't run again for this user
+      localStorage.setItem("cookie_version", CURRENT_VERSION);
+      console.log("Old cookies cleared. Version stored:", CURRENT_VERSION);
+    }
+  })();
+</script>
+      
+<script src="savegame.js"></script> <!-- access savegame.js for cookies script -->
+      
     <div class="background-pattern"></div>
     <div class="container">
         <header>
