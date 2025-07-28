@@ -6,3 +6,6 @@ will also update graphics and create more gameplay progression and possibly a re
 visual representation of owned upgrades, instead of numbers
 include offline runtime capabilities
 achievements?
+update notes + reset progress buttons
+
+modifiers: introducing a bar layout with square icons for upgrade that unlock (R to L pricing)
