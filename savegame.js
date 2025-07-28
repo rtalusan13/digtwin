@@ -1,4 +1,4 @@
-// Cookie utility functions
+tit// Cookie utility functions
 function setCookie(name, value, days) {
     const expires = new Date(Date.now() + days * 864e5).toUTCString();
     document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
@@ -12,12 +12,12 @@ function getCookie(name) {
 }
 
 // Save game state into a cookie
-function saveGame(peaches, clickPower, peachRate, upgradeData) {
+function saveGame(peaches, clickPower, peachRate, entityData) {
     const state = {
         peaches,
         clickPower,
         peachRate,
-        upgradeData
+        entityData
     };
     setCookie('digTwinSave', JSON.stringify(state), 30); // expires in 30 days
 }
