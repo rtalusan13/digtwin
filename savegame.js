@@ -1,7 +1,6 @@
 tit// Cookie utility functions
 function setCookie(name, value, days) {
-    //const expires = new Date(Date.now() + days * 864e5).toUTCString();
-    const expires = new Date(Date.now() + 1).toUTCString();
+    const expires = new Date(Date.now() + days * 864e5).toUTCString();
     document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
 }
 
