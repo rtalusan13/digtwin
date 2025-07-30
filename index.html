@@ -626,7 +626,7 @@
       const lastSaved = parseInt(localStorage.getItem("lastSavedTime") || Date.now());
       const timeElapsed = Math.floor((Date.now() - lastSaved) / 1000);
             if (timeElapsed > 1 && peachRate > 0) {
-                const offlinePeaches = peachRate * timeElapsed;
+                const offlinePeaches = peachRate * timeElapsed * 0.1;
                 peaches += offlinePeaches;
                 alert(`While you were gone, you earned ${formatNumber(offlinePeaches)} 🍑!`);
             } 
