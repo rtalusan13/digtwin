@@ -1,6 +1,6 @@
 # Updates & Patches
 ## 7/30/25
-- Miners work offline now  *(Offline rate = (0.1)\*Regular Rate)*
+- Miners work offline now  *(Offline rate = (0.01)\*Regular Rate)*
 - Other QOL changes and edge case prevention
 - Added update log (trying to use .txt file) and code buttons (try: peachy2025)
 ## 7/28/25
