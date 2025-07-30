@@ -613,20 +613,29 @@
         }
         // Update display
 
-      const loaded = loadGame();
-if (loaded) {
-    peaches = loaded.peaches || 0;
-    clickPower = loaded.clickPower || 1;
-    peachRate = loaded.peachRate || 0;
-    if (Array.isArray(loaded.entityData)) {
-        entityData = loaded.entityData;
-    }
-}
+      const loaded = loadGame() || {};
+      
+      if (loaded) {
+          peaches = loaded.peaches || 0;
+          clickPower = loaded.clickPower || 1;
+          peachRate = loaded.peachRate || 0;
+          if (Array.isArray(loaded.entityData)) {
+              entityData = loaded.entityData;
+          }
+      }
+          
+      const lastSaved = parseInt(localStorage.getItem("lastSavedTime") || Date.now());
+      const timeElapsed = Math.floor((Date.now() - lastSaved) / 1000);
+            if (timeElapsed > 1 && peachRate > 0) {
+                const offlinePeaches = peachRate * timeElapsed;
+                peaches += offlinePeaches;
+                alert(`While you were gone, you earned ${formatNumber(offlinePeaches)} 🍑!`);
+            } 
           
         function updateDisplay() {
             peachCounter.textContent = formatNumber(peaches) + ' 🍑';
             if (peachRate > 0) {
-                rateCounter.textContent = '+' + peachRate + ' per second';
+                rateCounter.textContent = '+' + formatNumber(peachRate) + ' per second';
             } else {
                 rateCounter.textContent = '';
             }
@@ -634,6 +643,7 @@ if (loaded) {
             // Update entity item states
             updateEntityStates();
             saveGame(peaches, clickPower, peachRate, entityData);
+            localStorage.setItem("lastSavedTime", Date.now());
         }
         // Update entity states (enable/disable based on cost)
         function updateEntityStates() {
@@ -699,8 +709,8 @@ if (loaded) {
             updateDisplay();
             // Create floating notification
             const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+            const x = e.clientX - rect.left + peachButton.offsetLeft;
+            const y = e.clientY - rect.top + peachButton.offsetTop;
             createNotification(x, y, clickPower);
         });
         // Handle entity purchases
@@ -709,7 +719,7 @@ if (loaded) {
             if (peaches >= entity.cost) {
                 peaches -= entity.cost;
                 entity.owned++;
-                entity.cost = Math.floor(entity.cost * 1.9);
+                entity.cost = Math.floor(entity.cost * 1.7);
                 peachRate += entity.rate;
                 if (id === 1) {
                     clickPower++;
