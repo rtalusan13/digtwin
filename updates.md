@@ -1,4 +1,7 @@
 # Updates & Patches
+## 7/30/25
+- Miners work offline now
+- Other QOL changes and edge case prevention
 ## 7/28/25
 - Looking into the button highlighting issue, where the peach emoji can be clicked on and highlighted (possible solution?: png rather than text)
 - Will further scale progression, price increase overlaps too early from one entity to the following one
