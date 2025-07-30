@@ -1,6 +1,6 @@
 # Updates & Patches
 ## 7/30/25
-- Miners work offline now | Offline rate = (0.1)*Regular Rate
+- Miners work offline now  *(Offline rate = (0.1)\*Regular Rate)*
 - Other QOL changes and edge case prevention
 ## 7/28/25
 - Looking into the button highlighting issue, where the peach emoji can be clicked on and highlighted (possible solution?: png rather than text)
