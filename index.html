@@ -797,6 +797,33 @@
                 }
             });
         });
+
+       //Pop-up buttons + codes
+        document.getElementById('updateLogBtn').addEventListener('click', () => {
+        document.getElementById('updatePopup').classList.toggle('hidden');
+            });
+
+        document.getElementById('closeUpdatePopup').addEventListener('click', () => {
+        document.getElementById('updatePopup').classList.add('hidden');
+        });
+
+        document.getElementById('redeemCodeBtn').addEventListener('click', () => {
+        const code = prompt("Enter your reward code:");
+        if (!code) return;
+
+        // Example: simple hardcoded reward
+        if (code.toLowerCase() === "peachy2025") {
+          if (!localStorage.getItem("code_peachy2025")) {
+            peaches += 10000;
+            alert("🎉 Code redeemed! You got 10,000 🍑");
+            localStorage.setItem("code_peachy2025", "used");
+          } else {
+            alert("🚫 You've already used this code.");
+          }
+        } else {
+          alert("❌ Invalid code.");
+        }
+        });
         // Auto-generate peaches
         setInterval(() => {
             if (peachRate > 0) {
