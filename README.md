@@ -13,3 +13,6 @@ update notes + reset progress buttons
 modifiers: introducing a bar layout with square icons for upgrade that unlock (R to L pricing)
 
 codes: codes to increase balance or entities
+- also make it an on screen popup rather than dealing with the tab (same thing with offline calculation)
+
+center + make update log button more visually appealing
