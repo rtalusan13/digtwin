@@ -11,3 +11,5 @@ achievements?
 update notes + reset progress buttons
 
 modifiers: introducing a bar layout with square icons for upgrade that unlock (R to L pricing)
+
+codes: codes to increase balance or entities
