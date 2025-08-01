@@ -1,4 +1,6 @@
 # Updates & Patches
+## 8/1/25
+- Updated code logic (switch case) - try: bonuspeaches, 
 ## 7/30/25
 - Miners work offline now  *(Offline rate = (0.01)\*Regular Rate)*
 - Other QOL changes and edge case prevention
