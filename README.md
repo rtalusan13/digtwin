@@ -16,3 +16,5 @@ codes: codes to increase balance or entities
 - also make it an on screen popup rather than dealing with the tab (same thing with offline calculation)
 
 center + make update log button more visually appealing
+
+maybe also hide the code from inspect element, idk just an idea tho
