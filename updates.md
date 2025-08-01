@@ -4,6 +4,7 @@
 
 *can also look at script in inspect element*
 - Changed display refresh rate from 1000 ms --> 20 ms
+- Planning entities scaling update to balance gameplay + plateaus
 ## 7/30/25
 - Miners work offline now  *(Offline rate = (0.01)\*Regular Rate)*
 - Other QOL changes and edge case prevention
