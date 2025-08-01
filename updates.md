@@ -1,6 +1,7 @@
 # Updates & Patches
 ## 8/1/25
 - Updated code logic (switch case) - try: bonuspeaches, anothercode
+
 *can also look at script in inspect element*
 - Changed display refresh rate from 1000 ms --> 20 ms
 ## 7/30/25
