@@ -855,10 +855,10 @@
         // Auto-generate peaches
         setInterval(() => {
             if (peachRate > 0) {
-                peaches += peachRate;
+                peaches += (peachRate*0.02);
                 updateDisplay();
             }
-        }, 1000);
+        }, 20);
         // Initialize display
         updateDisplay();
         updateEmpire();
