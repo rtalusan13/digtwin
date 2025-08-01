@@ -853,12 +853,13 @@
                   });
           
         // Auto-generate peaches
+        let refreshPeachRate = 20/1000 //can change the numerator to desired refresh time in ms
         setInterval(() => {
             if (peachRate > 0) {
-                peaches += (peachRate*0.02);
+                peaches += (peachRate*refreshPeachRate);
                 updateDisplay();
             }
-        }, 20);
+        }, 1000*refreshPeachRate);
         // Initialize display
         updateDisplay();
         updateEmpire();
