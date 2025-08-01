@@ -798,64 +798,60 @@
             });
         });
 
-       //Pop-up buttons + codes
-        document.getElementById('updateLogBtn').addEventListener('click', () => {
-        document.getElementById('updatePopup').classList.toggle('hidden');
-            });
-
-        document.getElementById('closeUpdatePopup').addEventListener('click', () => {
-        document.getElementById('updatePopup').classList.add('hidden');
-        });
-
-        document.getElementById('redeemCodeBtn').addEventListener('click', () => {
-        const code = prompt("Enter your reward code:");
-        if (!code) return;
-
-        // Example: simple hardcoded reward
-        // A map to store your codes and their corresponding rewards/logic
-        const availableCodes = {
+            // A map to store your codes and their corresponding rewards/logic
+            const availableCodes = {
               "peachy2025": {
                 reward: 10000,
                 message: "🎉 Code redeemed! You got 10,000 🍑",
-                // You can add more properties here if needed, like a function to execute
               },
-              "anotherCode": {
+              "anothercode": {
                 reward: 5000,
                 message: "🥳 Another code redeemed! You got 5,000 extra 🍑",
               },
-              "bonusPeaches": {
+              "bonuspeaches": {
                 reward: 20000,
                 message: "🎁 Bonus code redeemed! Enjoy your 20,000 🍑",
               }
             };
 
-            // Assuming you have an event listener for your code input,
-            // this is the core logic that you'd place inside it.
-            document.getElementById('your-redeem-button-id').addEventListener('click', () => {
-            const code = document.getElementById('your-code-input-id').value.toLowerCase();
+            // Pop-up buttons
+            document.getElementById('updateLogBtn').addEventListener('click', () => {
+              document.getElementById('updatePopup').classList.toggle('hidden');
+            });
 
-              switch (code) {
+            document.getElementById('closeUpdatePopup').addEventListener('click', () => {
+              document.getElementById('updatePopup').classList.add('hidden');
+            });
+
+            // Redeem code button - consolidated and correct logic
+            document.getElementById('redeemCodeBtn').addEventListener('click', () => {
+              const code = prompt("Enter your reward code:");
+  
+              // Exit the function if the user cancels the prompt or enters an empty string
+              if (!code) {
+                return;
+              }
+  
+              const lowerCaseCode = code.toLowerCase();
+
+              switch (lowerCaseCode) {
                 case "peachy2025":
                 case "anothercode":
                 case "bonuspeaches":
-                  // Check if the code exists in our map
-                  if (availableCodes[code]) {
-                    // Check if the user has already used this specific code
-                    if (!localStorage.getItem(`code_${code}`)) {
-                      // Get the reward from our map
-                      peaches += availableCodes[code].reward;
-                      alert(availableCodes[code].message);
-                      localStorage.setItem(`code_${code}`, "used");
-                    } else {
-                      alert("🚫 You've already used this code.");
-                    }
+                if (!localStorage.getItem(`code_${lowerCaseCode}`)) {
+                    peaches += availableCodes[lowerCaseCode].reward;
+                    alert(availableCodes[lowerCaseCode].message);
+                    localStorage.setItem(`code_${lowerCaseCode}`, "used");
+                  } else {
+                    alert("🚫 You've already used this code.");
                   }
                   break;
 
                 default:
                   alert("❌ Invalid code.");
               }
-            });
+                  });
+          
         // Auto-generate peaches
         setInterval(() => {
             if (peachRate > 0) {
