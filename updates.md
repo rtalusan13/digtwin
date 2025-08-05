@@ -2,7 +2,7 @@
 ## 8/4/25
 - Updated the update log visuals into a larger pop-up
 - Integrated updates.md file into index.html to use as the source of the update log text
-- Collapsible empire display for a cleaner look with icons
+- Collapsible empire display for a cleaner look with icons, which loads collapsed when page is opened
 ## 8/1/25
 - Updated code logic (switch case) - try: bonuspeaches, anothercode
 *can also look at script in inspect element*
