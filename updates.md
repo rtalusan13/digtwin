@@ -1,5 +1,9 @@
 # Updates & Patches
 
+## Future Notes
+- Looking to shift update-log scroll bar from right side to left
+- Will make update-log text smaller by 1 pt and reduce the line spacing between each bulletpoint
+
 ## 8/5/25
 - Fixed bug where code prompter would halt peach updates in browser
 - Edited reward code panel to be an on-screen pop-up rather than being integrated through the browser
