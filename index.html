@@ -285,28 +285,55 @@
              }
 
              .popup ul {
-               list-style: none;
-               padding: 0;
-               margin: 0;
+               list-style: disc;
+               padding-left: 20px;
+               margin: 10px 0;
              }
 
              .popup li {
-               padding: 10px 0;
-               border-bottom: 1px solid rgba(255, 170, 0, 0.1);
+               padding: 5px 0;
                font-size: 0.9rem;
                line-height: 1.4;
                color: #fff;
-             }
-
-             .popup li:last-child {
-               border-bottom: none;
+               border: none;
              }
 
              .popup li:hover {
-               background: rgba(255, 170, 0, 0.05);
-               margin: 0 -15px;
-               padding: 15px;
-               border-radius: 8px;
+               background: none;
+               margin: 0;
+               padding: 5px 0;
+               border-radius: 0;
+             }
+
+             /* Collapsible sections */
+             .collapsible {
+               cursor: pointer;
+               user-select: none;
+             }
+
+             .collapsible:hover {
+               color: #ffb7c5;
+             }
+
+             .collapsible::after {
+               content: ' ▼';
+               font-size: 0.8rem;
+               color: #ffaa00;
+               transition: transform 0.3s ease;
+             }
+
+             .collapsible.collapsed::after {
+               transform: rotate(-90deg);
+             }
+
+             .collapsible-content {
+               max-height: 1000px;
+               overflow: hidden;
+               transition: max-height 0.3s ease;
+             }
+
+             .collapsible-content.collapsed {
+               max-height: 0;
              }
 
              .popup strong {
@@ -338,7 +365,7 @@
              }
 
              .popup-content::-webkit-scrollbar-track {
-               background: rgba(255, 255, 255, 0.05);
+               background: transparent;
                border-radius: 3px;
                margin: 5px 0;
              }
@@ -356,7 +383,7 @@
              /* Firefox scrollbar */
              .popup-content {
                scrollbar-width: thin;
-               scrollbar-color: rgba(255, 170, 0, 0.4) rgba(255, 255, 255, 0.05);
+               scrollbar-color: rgba(255, 170, 0, 0.4) transparent;
              }
         @keyframes floatUp {
             0% {
@@ -951,53 +978,87 @@
               }
             };
 
-            // Function to convert markdown to HTML (simple implementation)
-            function markdownToHtml(markdown) {
-              return markdown
-                // Headers
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^# (.*$)/gim, '<h2>$1</h2>')
-                // Bold
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                // Italic
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                // Lists
-                .replace(/^- (.*$)/gim, '<li>$1</li>')
-                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-                // Paragraphs
-                .replace(/^(?!<[h|u|d])(.*$)/gim, '<p>$1</p>')
-                // Horizontal rules
-                .replace(/^---$/gim, '<hr>')
-                // Clean up empty paragraphs
-                .replace(/<p><\/p>/g, '')
-                .replace(/<p>\s*<\/p>/g, '');
-            }
+                         // Function to convert markdown to HTML with collapsible sections
+             function markdownToHtml(markdown) {
+               let html = markdown
+                 // Headers
+                 .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                 .replace(/^## (.*$)/gim, '<h3 class="collapsible">$1</h3>')
+                 .replace(/^# (.*$)/gim, '<h2>$1</h2>')
+                 // Bold
+                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                 // Italic
+                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                 // Lists
+                 .replace(/^- (.*$)/gim, '<li>$1</li>')
+                 .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
+                 // Paragraphs
+                 .replace(/^(?!<[h|u|d])(.*$)/gim, '<p>$1</p>')
+                 // Horizontal rules
+                 .replace(/^---$/gim, '<hr>')
+                 // Clean up empty paragraphs
+                 .replace(/<p><\/p>/g, '')
+                 .replace(/<p>\s*<\/p>/g, '');
 
-            // Function to load update content
-            async function loadUpdateContent() {
-              const updateContent = document.getElementById('updateContent');
-              
-              try {
-                const response = await fetch('updates.md');
-                if (!response.ok) {
-                  throw new Error('Failed to load updates');
-                }
-                
-                const markdown = await response.text();
-                const html = markdownToHtml(markdown);
-                
-                // Remove the loading text and set the HTML content
-                updateContent.innerHTML = html;
-              } catch (error) {
-                console.error('Error loading updates:', error);
-                updateContent.innerHTML = `
-                  <h2>📜 Update Log</h2>
-                  <p>Unable to load updates at this time. Please try again later.</p>
-                  <p><em>Error: ${error.message}</em></p>
-                `;
-              }
-            }
+               // Add collapsible functionality to H3 headers
+               html = html.replace(
+                 /<h3 class="collapsible">(.*?)<\/h3>([\s\S]*?)(?=<h3 class="collapsible">|<h2>|$)/g,
+                 '<h3 class="collapsible">$1</h3><div class="collapsible-content">$2</div>'
+               );
+
+               return html;
+             }
+
+             // Function to initialize collapsible sections
+             function initializeCollapsible() {
+               const collapsibles = document.querySelectorAll('.collapsible');
+               collapsibles.forEach((header, index) => {
+                 const content = header.nextElementSibling;
+                 if (content && content.classList.contains('collapsible-content')) {
+                   // First section (index 0) stays open, others start collapsed
+                   if (index === 0) {
+                     header.classList.remove('collapsed');
+                     content.classList.remove('collapsed');
+                   } else {
+                     header.classList.add('collapsed');
+                     content.classList.add('collapsed');
+                   }
+
+                   header.addEventListener('click', () => {
+                     header.classList.toggle('collapsed');
+                     content.classList.toggle('collapsed');
+                   });
+                 }
+               });
+             }
+
+                         // Function to load update content
+             async function loadUpdateContent() {
+               const updateContent = document.getElementById('updateContent');
+               
+               try {
+                 const response = await fetch('updates.md');
+                 if (!response.ok) {
+                   throw new Error('Failed to load updates');
+                 }
+                 
+                 const markdown = await response.text();
+                 const html = markdownToHtml(markdown);
+                 
+                 // Remove the loading text and set the HTML content
+                 updateContent.innerHTML = html;
+                 
+                 // Initialize collapsible sections after content is loaded
+                 initializeCollapsible();
+               } catch (error) {
+                 console.error('Error loading updates:', error);
+                 updateContent.innerHTML = `
+                   <h2>📜 Update Log</h2>
+                   <p>Unable to load updates at this time. Please try again later.</p>
+                   <p><em>Error: ${error.message}</em></p>
+                 `;
+               }
+             }
 
             // Pop-up buttons
             document.getElementById('updateLogBtn').addEventListener('click', () => {
