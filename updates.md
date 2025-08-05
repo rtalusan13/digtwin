@@ -3,6 +3,7 @@
 ## Future Notes
 - Looking to shift update-log scroll bar from right side to left
 - Will make update-log text smaller by 1 pt and reduce the line spacing between each bulletpoint
+- Prompt: put the update log scroll bar on the left side of the box, with just a few pixels of padding from the left edge of the box. do not mak it look awkward and make sure the text does not shift positions while there is a scrollbar. make sure all the text is still aligned to the left and reduce the line spacing between each bullet point and make the bulletpoint text smaller by 1 pt
 
 ## 8/5/25
 - Fixed bug where code prompter would halt peach updates in browser
