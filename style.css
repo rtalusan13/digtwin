@@ -304,7 +304,7 @@ h1 {
     border: 1px solid rgba(255, 170, 0, 0.3);
     border-radius: 20px;
     padding: 0;
-    max-width: 400px;
+    max-width: 600px;
     width: 90%;
     max-height: 80vh;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -481,6 +481,12 @@ h1 {
 .popup-inner {
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 170, 0, 0.4) transparent;
+}
+
+/* Update log popup specific styling */
+#updatePopup .popup-content {
+    max-width: 600px;
+    width: 90%;
 }
 
 /* Reward popup specific styling */
