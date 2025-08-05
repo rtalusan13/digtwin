@@ -492,6 +492,22 @@
                scrollbar-width: thin;
                scrollbar-color: rgba(255, 170, 0, 0.4) transparent;
              }
+
+             /* Reward popup button hover effects */
+             #redeemButton:hover {
+               transform: translateY(-2px);
+               box-shadow: 0 8px 20px rgba(255, 170, 0, 0.4);
+             }
+
+             #redeemButton:active {
+               transform: translateY(0);
+             }
+
+             #codeInput:focus {
+               outline: none;
+               border-color: rgba(255, 170, 0, 0.6);
+               box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+             }
         @keyframes floatUp {
             0% {
                 opacity: 1;
@@ -709,6 +725,30 @@
                            <div id="updateContent">
                              <h2>📜 Update Log</h2>
                              <div class="loading">Loading updates...</div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+
+                     <!-- Reward code popup -->
+                     <div id="rewardPopup" class="popup">
+                       <div class="popup-content">
+                         <button id="closeRewardPopup" class="close">&times;</button>
+                         <div class="popup-inner">
+                           <div id="rewardContent">
+                             <h2>🎁 Redeem Reward Code</h2>
+                             <div style="text-align: center; margin: 20px 0;">
+                               <input type="text" id="codeInput" placeholder="Enter your code here..." 
+                                      style="width: 100%; padding: 12px; border: 2px solid rgba(255, 170, 0, 0.3); 
+                                             border-radius: 8px; background: rgba(30, 30, 46, 0.8); color: white; 
+                                             font-size: 16px; margin-bottom: 15px;">
+                               <button id="redeemButton" style="background: linear-gradient(135deg, #ffaa00, #ff6b9d); 
+                                       border: none; color: white; padding: 12px 24px; border-radius: 8px; 
+                                       font-size: 16px; cursor: pointer; font-weight: 600; transition: all 0.2s ease;">
+                                 Redeem Code
+                               </button>
+                             </div>
+                             <div id="rewardMessage" style="text-align: center; margin-top: 15px; font-weight: 600;"></div>
                            </div>
                          </div>
                        </div>
@@ -955,9 +995,9 @@
         const empireGrid = document.querySelector('.empire-grid');
         // Format large numbers
         function formatNumber(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-            return num.toString();
+            if (num >= 1000000) return (num / 1000000).toFixed(2) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(2) + 'K';
+            return num.toFixed(2);
         }
         // Update display
 
@@ -1117,6 +1157,23 @@
                 }
             });
         });
+
+            // A map to store your codes and their corresponding rewards/logic
+            const availableCodes = {
+              "peachy2025": {
+                reward: 10000,
+                message: "🎉 Code redeemed! You got 10,000 🍑",
+              },
+              "anothercode": {
+                reward: 5000,
+                message: "🥳 Another code redeemed! You got 5,000 extra 🍑",
+              },
+              "bonuspeaches": {
+                reward: 20000,
+                message: "🎁 Bonus code redeemed! Enjoy your 20,000 🍑",
+              }
+            };
+
                          // Function to convert markdown to HTML with collapsible sections
              function markdownToHtml(markdown) {
                let html = markdown
@@ -1256,65 +1313,80 @@
 
             // Close popup with Escape key
             document.addEventListener('keydown', (e) => {
-              if (e.key === 'Escape' && document.getElementById('updatePopup').classList.contains('visible')) {
-                document.getElementById('updatePopup').classList.remove('visible');
+              if (e.key === 'Escape') {
+                if (document.getElementById('updatePopup').classList.contains('visible')) {
+                  document.getElementById('updatePopup').classList.remove('visible');
+                }
+                if (document.getElementById('rewardPopup').classList.contains('visible')) {
+                  document.getElementById('rewardPopup').classList.remove('visible');
+                  document.getElementById('codeInput').value = '';
+                  document.getElementById('rewardMessage').textContent = '';
+                }
               }
             });
 
-
-          // A map to store your codes and their corresponding rewards/logic
-            const availableCodes = {
-              "peachy2025": {
-                reward: 10000,
-                message: "🎉 Code redeemed! You got 10,000 🍑",
-              },
-              "anothercode": {
-                reward: 5000,
-                message: "🥳 Another code redeemed! You got 5,000 extra 🍑",
-              },
-              "bonuspeaches": {
-                reward: 20000,
-                message: "🎁 Bonus code redeemed! Enjoy your 20,000 🍑",
-              },
-              "imdiggingtwin": {
-                reward: 100000,
-                message: "🎁 Code redeemed! Enjoy your 100,000 🍑",
-              },
-              "more_updates": {
-                reward: 20000,
-                message: "🎁 Code redeemed! Enjoy your 20,000 🍑",
-              }
-            };
-            // Redeem code button - consolidated and correct logic
+            // Reward code popup functionality
             document.getElementById('redeemCodeBtn').addEventListener('click', () => {
-              const code = prompt("Enter your reward code:");
-  
-              // Exit the function if the user cancels the prompt or enters an empty string
+              document.getElementById('rewardPopup').classList.add('visible');
+              document.getElementById('codeInput').focus();
+            });
+
+            document.getElementById('closeRewardPopup').addEventListener('click', () => {
+              document.getElementById('rewardPopup').classList.remove('visible');
+              document.getElementById('codeInput').value = '';
+              document.getElementById('rewardMessage').textContent = '';
+            });
+
+            // Close reward popup when clicking outside
+            document.getElementById('rewardPopup').addEventListener('click', (e) => {
+              if (e.target.id === 'rewardPopup') {
+                document.getElementById('rewardPopup').classList.remove('visible');
+                document.getElementById('codeInput').value = '';
+                document.getElementById('rewardMessage').textContent = '';
+              }
+            });
+
+            // Handle redeem button click
+            document.getElementById('redeemButton').addEventListener('click', () => {
+              const code = document.getElementById('codeInput').value.trim();
+              const messageElement = document.getElementById('rewardMessage');
+              
               if (!code) {
+                messageElement.textContent = '❌ Please enter a code.';
+                messageElement.style.color = '#ff6b6b';
                 return;
               }
-  
+
               const lowerCaseCode = code.toLowerCase();
 
               switch (lowerCaseCode) {
                 case "peachy2025":
                 case "anothercode":
                 case "bonuspeaches":
-                case "imdiggingtwin":
-                case "more_updates":
-                if (!localStorage.getItem(`code_${lowerCaseCode}`)) {
+                  if (!localStorage.getItem(`code_${lowerCaseCode}`)) {
                     peaches += availableCodes[lowerCaseCode].reward;
-                    alert(availableCodes[lowerCaseCode].message);
+                    messageElement.textContent = availableCodes[lowerCaseCode].message;
+                    messageElement.style.color = '#4ade80';
                     localStorage.setItem(`code_${lowerCaseCode}`, "used");
+                    updateDisplay();
                   } else {
-                    alert("🚫 You've already used this code.");
+                    messageElement.textContent = "🚫 You've already used this code.";
+                    messageElement.style.color = '#ffaa00';
                   }
                   break;
 
                 default:
-                  alert("❌ Invalid code.");
+                  messageElement.textContent = "❌ Invalid code.";
+                  messageElement.style.color = '#ff6b6b';
               }
-                  });
+            });
+
+            // Handle Enter key in code input
+            document.getElementById('codeInput').addEventListener('keypress', (e) => {
+              if (e.key === 'Enter') {
+                document.getElementById('redeemButton').click();
+              }
+            });
           
         // Auto-generate peaches
         let refreshPeachRate = 20/1000 //can change the numerator to desired refresh time in ms
