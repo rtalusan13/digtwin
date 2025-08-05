@@ -109,38 +109,39 @@
              color: #ffb7c5;
          }
 
-         .empire-toggle {
-             font-size: 1.2rem;
-             color: #ffaa00;
-             transition: transform 0.3s ease;
-         }
+                   .empire-toggle {
+              font-size: 1.2rem;
+              color: #ffaa00;
+              transition: transform 0.3s ease;
+              transform: rotate(-90deg);
+          }
 
-         .empire-toggle.collapsed {
-             transform: rotate(-90deg);
-         }
+          .empire-toggle.expanded {
+              transform: rotate(0deg);
+          }
 
-         .empire-content {
-             max-height: 1000px;
-             overflow: hidden;
-             transition: max-height 0.3s ease;
-         }
+                   .empire-content {
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.3s ease;
+          }
 
-         .empire-content.collapsed {
-             max-height: 0;
-         }
+          .empire-content.expanded {
+              max-height: 1000px;
+          }
 
-         .empire-compact {
-             display: none;
-             flex-wrap: wrap;
-             gap: 15px;
-             justify-content: center;
-             align-items: center;
-             padding: 15px 0;
-         }
+                   .empire-compact {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 15px;
+              justify-content: center;
+              align-items: center;
+              padding: 15px 0;
+          }
 
-         .empire-compact.visible {
-             display: flex;
-         }
+          .empire-compact.hidden {
+              display: none;
+          }
 
          .compact-entity {
              display: flex;
@@ -1299,16 +1300,16 @@
                 updateDisplay();
             }
         }, 1000*refreshPeachRate);
-                 // Initialize empire collapsible functionality
-         document.getElementById('empireHeader').addEventListener('click', () => {
-             const toggle = document.getElementById('empireToggle');
-             const content = document.getElementById('empireContent');
-             const compact = document.getElementById('empireCompact');
-             
-             toggle.classList.toggle('collapsed');
-             content.classList.toggle('collapsed');
-             compact.classList.toggle('visible');
-         });
+                           // Initialize empire collapsible functionality
+          document.getElementById('empireHeader').addEventListener('click', () => {
+              const toggle = document.getElementById('empireToggle');
+              const content = document.getElementById('empireContent');
+              const compact = document.getElementById('empireCompact');
+              
+              toggle.classList.toggle('expanded');
+              content.classList.toggle('expanded');
+              compact.classList.toggle('hidden');
+          });
 
          // Initialize display
          updateDisplay();
