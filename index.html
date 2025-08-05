@@ -287,34 +287,38 @@
               visibility: visible;
             }
 
-                         .popup-content {
-               background: rgba(30, 30, 46, 0.95);
-               backdrop-filter: blur(15px);
-               border: 1px solid rgba(255, 170, 0, 0.3);
-               border-radius: 20px;
-               padding: 0;
-               max-width: 600px;
-               width: 90%;
-               max-height: 80vh;
-               box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-               position: relative;
-               transform: scale(0.9);
-               transition: transform 0.3s ease;
-               /* Ensure scrollbar is contained within the popup */
-               box-sizing: border-box;
-               /* Direction for left scrollbar */
-               direction: rtl;
-               /* Ensure scrollbar respects border radius */
-               overflow: hidden;
-             }
+                                       .popup-content {
+                background: rgba(30, 30, 46, 0.95);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 170, 0, 0.3);
+                border-radius: 20px;
+                padding: 0;
+                max-width: 600px;
+                width: 90%;
+                max-height: 80vh;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                position: relative;
+                transform: scale(0.9);
+                transition: transform 0.3s ease;
+                /* Ensure scrollbar is contained within the popup */
+                box-sizing: border-box;
+                /* Direction for left scrollbar */
+                direction: rtl;
+                /* Ensure scrollbar respects border radius */
+                overflow: hidden;
+                /* Reserve space for scrollbar to prevent content shift */
+                padding-left: 20px;
+              }
 
-             .popup-inner {
-               padding: 30px;
-               padding-left: 40px;
-               max-height: 80vh;
-               overflow-y: auto;
-               height: 100%;
-             }
+                           .popup-inner {
+                padding: 30px;
+                padding-left: 50px;
+                max-height: 80vh;
+                overflow-y: auto;
+                height: 100%;
+                /* Ensure content doesn't shift when scrollbar appears */
+                box-sizing: border-box;
+              }
 
             .popup.visible .popup-content {
               transform: scale(1);
@@ -444,24 +448,26 @@
                padding: 20px;
              }
 
-                         /* Custom scrollbar for the popup inner content */
-             .popup-inner::-webkit-scrollbar {
-               width: 6px;
-             }
+                                       /* Custom scrollbar for the popup inner content */
+              .popup-inner::-webkit-scrollbar {
+                width: 6px;
+              }
 
-             .popup-inner::-webkit-scrollbar-track {
-               background: transparent;
-               border-radius: 3px;
-               margin: 20px 0;
-             }
+              .popup-inner::-webkit-scrollbar-track {
+                background: transparent;
+                border-radius: 3px;
+                margin: 20px 0;
+                margin-left: 10px;
+              }
 
-             .popup-inner::-webkit-scrollbar-thumb {
-               background: rgba(255, 170, 0, 0.4);
-               border-radius: 3px;
-               border: 1px solid rgba(255, 170, 0, 0.1);
-               min-height: 30px;
-               margin: 0 2px;
-             }
+              .popup-inner::-webkit-scrollbar-thumb {
+                background: rgba(255, 170, 0, 0.4);
+                border-radius: 3px;
+                border: 1px solid rgba(255, 170, 0, 0.1);
+                min-height: 30px;
+                margin: 0 2px;
+                margin-left: 10px;
+              }
 
              .popup-inner::-webkit-scrollbar-thumb:hover {
                background: rgba(255, 170, 0, 0.6);
