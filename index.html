@@ -220,21 +220,23 @@
               visibility: visible;
             }
 
-            .popup-content {
-              background: rgba(30, 30, 46, 0.95);
-              backdrop-filter: blur(15px);
-              border: 1px solid rgba(255, 170, 0, 0.3);
-              border-radius: 20px;
-              padding: 30px;
-              max-width: 600px;
-              width: 90%;
-              max-height: 80vh;
-              overflow-y: auto;
-              box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-              position: relative;
-              transform: scale(0.9);
-              transition: transform 0.3s ease;
-            }
+                         .popup-content {
+               background: rgba(30, 30, 46, 0.95);
+               backdrop-filter: blur(15px);
+               border: 1px solid rgba(255, 170, 0, 0.3);
+               border-radius: 20px;
+               padding: 30px;
+               max-width: 600px;
+               width: 90%;
+               max-height: 80vh;
+               overflow-y: auto;
+               box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+               position: relative;
+               transform: scale(0.9);
+               transition: transform 0.3s ease;
+               /* Ensure scrollbar is contained within the popup */
+               box-sizing: border-box;
+             }
 
             .popup.visible .popup-content {
               transform: scale(1);
@@ -367,17 +369,23 @@
              .popup-content::-webkit-scrollbar-track {
                background: transparent;
                border-radius: 3px;
-               margin: 5px 0;
+               margin: 10px 0;
              }
 
              .popup-content::-webkit-scrollbar-thumb {
                background: rgba(255, 170, 0, 0.4);
                border-radius: 3px;
                border: 1px solid rgba(255, 170, 0, 0.1);
+               min-height: 40px;
              }
 
              .popup-content::-webkit-scrollbar-thumb:hover {
                background: rgba(255, 170, 0, 0.6);
+             }
+
+             /* Hide scrollbar buttons/arrows */
+             .popup-content::-webkit-scrollbar-button {
+               display: none;
              }
 
              /* Firefox scrollbar */
