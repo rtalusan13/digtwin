@@ -2,7 +2,8 @@
 
 ## 8/5/25
 - Fixed bug where code prompter would halt peach updates in browser
-- Edited reward code panel to be an on-screen pop-up rather than being integrated through the browswer
+- Edited reward code panel to be an on-screen pop-up rather than being integrated through the browser
+- Updated peach display to be limited to 2 decimal points, and also reformatted quantities (ex. 6700M to 6.7B)
 ## 8/4/25
 - Updated the update log visuals into a larger pop-up
 - Integrated updates.md file into index.html to use as the source of the update log text
