@@ -1117,23 +1117,6 @@
                 }
             });
         });
-
-            // A map to store your codes and their corresponding rewards/logic
-            const availableCodes = {
-              "peachy2025": {
-                reward: 10000,
-                message: "🎉 Code redeemed! You got 10,000 🍑",
-              },
-              "anothercode": {
-                reward: 5000,
-                message: "🥳 Another code redeemed! You got 5,000 extra 🍑",
-              },
-              "bonuspeaches": {
-                reward: 20000,
-                message: "🎁 Bonus code redeemed! Enjoy your 20,000 🍑",
-              }
-            };
-
                          // Function to convert markdown to HTML with collapsible sections
              function markdownToHtml(markdown) {
                let html = markdown
@@ -1278,6 +1261,30 @@
               }
             });
 
+
+          // A map to store your codes and their corresponding rewards/logic
+            const availableCodes = {
+              "peachy2025": {
+                reward: 10000,
+                message: "🎉 Code redeemed! You got 10,000 🍑",
+              },
+              "anothercode": {
+                reward: 5000,
+                message: "🥳 Another code redeemed! You got 5,000 extra 🍑",
+              },
+              "bonuspeaches": {
+                reward: 20000,
+                message: "🎁 Bonus code redeemed! Enjoy your 20,000 🍑",
+              },
+              "imdiggingtwin": {
+                reward: 100000,
+                message: "🎁 Code redeemed! Enjoy your 100,000 🍑",
+              },
+              "more_updates": {
+                reward: 20000,
+                message: "🎁 Code redeemed! Enjoy your 20,000 🍑",
+              }
+            };
             // Redeem code button - consolidated and correct logic
             document.getElementById('redeemCodeBtn').addEventListener('click', () => {
               const code = prompt("Enter your reward code:");
@@ -1293,6 +1300,8 @@
                 case "peachy2025":
                 case "anothercode":
                 case "bonuspeaches":
+                case "imdiggingtwin":
+                case "more_updates":
                 if (!localStorage.getItem(`code_${lowerCaseCode}`)) {
                     peaches += availableCodes[lowerCaseCode].reward;
                     alert(availableCodes[lowerCaseCode].message);
