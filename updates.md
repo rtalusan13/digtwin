@@ -3,7 +3,6 @@
 - Updated the update log visuals into a larger pop-up
 - Integrated updates.md file into index.html to use as the source of the update log text
 - Collapsible empire display for a cleaner look with icons
-
 ## 8/1/25
 - Updated code logic (switch case) - try: bonuspeaches, anothercode
 *can also look at script in inspect element*
@@ -18,11 +17,11 @@
 - Looking into the button highlighting issue, where the peach emoji can be clicked on and highlighted (possible solution?: png rather than text)
 - Will further scale progression, price increase overlaps too early from one entity to the following one
 - Also noticed how much empty space there is on desktop, would look to see if there can be any features added to desktop specifically as well as making mobile less compact
-## 7/27/25
+## 7/27/25 (Peach Reset)
 - Renamed "Upgrades" to "Entities" across all files, to make way for modifiers/upgrades that can be bought separate of entities
 - Included new entities, scaled progression to set up for upgrades (more patches will decrease rates)
-- **COOKIES RESET #1** ; Across all devices, all data has been reset to 0
-## 7/26/25
+- **PEACHES RESET #1** ; Across all devices, all data has been reset to 0
+## 7/26/25 (Released!)
 Built and Launched!
 - Incorporated Cookies to save user data on devices for 30 days.
 - Updated visuals, graphics, and functionality on mobile devices.
