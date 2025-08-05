@@ -83,17 +83,83 @@
             min-height: 70vh;
             padding: 20px 0;
         }
-        .visuals-panel {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            background: rgba(30, 30, 46, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(128, 128, 128, 0.3);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+                 .visuals-panel {
+             flex: 1;
+             min-width: 300px;
+             max-width: 400px;
+             background: rgba(30, 30, 46, 0.3);
+             backdrop-filter: blur(10px);
+             border: 1px solid rgba(128, 128, 128, 0.3);
+             border-radius: 20px;
+             padding: 25px;
+             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+             transition: all 0.3s ease;
+         }
+
+         .empire-header {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             cursor: pointer;
+             user-select: none;
+             margin-bottom: 20px;
+         }
+
+         .empire-header:hover .panel-title {
+             color: #ffb7c5;
+         }
+
+         .empire-toggle {
+             font-size: 1.2rem;
+             color: #ffaa00;
+             transition: transform 0.3s ease;
+         }
+
+         .empire-toggle.collapsed {
+             transform: rotate(-90deg);
+         }
+
+         .empire-content {
+             max-height: 1000px;
+             overflow: hidden;
+             transition: max-height 0.3s ease;
+         }
+
+         .empire-content.collapsed {
+             max-height: 0;
+         }
+
+         .empire-compact {
+             display: none;
+             flex-wrap: wrap;
+             gap: 15px;
+             justify-content: center;
+             align-items: center;
+             padding: 15px 0;
+         }
+
+         .empire-compact.visible {
+             display: flex;
+         }
+
+         .compact-entity {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             text-align: center;
+             min-width: 60px;
+         }
+
+         .compact-emoji {
+             font-size: 1.5rem;
+             margin-bottom: 5px;
+         }
+
+         .compact-count {
+             font-size: 0.7rem;
+             color: #aaa;
+             font-weight: 600;
+         }
         .panel-title {
             text-align: center;
             font-size: 1.3rem;
@@ -621,16 +687,31 @@
             <div class="rate-counter"></div>
         </header>
         <div class="game-area">
-            <!-- Visual Collection Area -->
-            <div class="visuals-panel">
-                <h2 class="panel-title">Your Digger Empire</h2>
-                <div class="empire-grid">
-                    <div class="empty-empire">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">🍑</div>
-                        <p>Start buying entities to build your empire!</p>
-                    </div>
-                </div>
-            </div>
+                         <!-- Visual Collection Area -->
+             <div class="visuals-panel">
+                 <div class="empire-header" id="empireHeader">
+                     <h2 class="panel-title">Your Digger Empire</h2>
+                     <span class="empire-toggle" id="empireToggle">▼</span>
+                 </div>
+                 
+                 <!-- Compact view (shown when collapsed) -->
+                 <div class="empire-compact" id="empireCompact">
+                     <div class="compact-entity">
+                         <div class="compact-emoji">🍑</div>
+                         <div class="compact-count">0</div>
+                     </div>
+                 </div>
+                 
+                 <!-- Full view (shown when expanded) -->
+                 <div class="empire-content" id="empireContent">
+                     <div class="empire-grid">
+                         <div class="empty-empire">
+                             <div style="font-size: 3rem; margin-bottom: 10px;">🍑</div>
+                             <p>Start buying entities to build your empire!</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
             <!-- Peach Clicker -->
             <div class="peach-clicker">
                 <div class="click-power">Click Power: 1</div>
@@ -895,33 +976,65 @@
                 }
             });
         }
-        // Update empire visualization
-        function updateEmpire() {
-            // Clear current items
-            empireGrid.innerHTML = '';
-            // Check if any entities are owned
-            const ownedEntities = entityData.filter(u => u.owned > 0);
-            if (ownedEntities.length === 0) {
-                empireGrid.innerHTML = `
-                    <div class="empty-empire">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">🍑</div>
-                        <p>Start buying entities to build your empire!</p>
-                    </div>
-                `;
-                return;
-            }
-            // Add owned entities to grid
-            ownedEntities.forEach(entity => {
-                const itemElement = document.createElement('div');
-                itemElement.className = 'empire-item';
-                itemElement.innerHTML = `
-                    <div class="item-emoji">${entity.emoji}</div>
-                    <div class="item-name">${entity.name}</div>
-                    <div class="item-count">Owned: ${entity.owned}</div>
-                `;
-                empireGrid.appendChild(itemElement);
-            });
-        }
+                 // Update empire visualization
+         function updateEmpire() {
+             // Clear current items
+             empireGrid.innerHTML = '';
+             
+             // Check if any entities are owned
+             const ownedEntities = entityData.filter(u => u.owned > 0);
+             
+             // Update compact view
+             updateCompactEmpire(ownedEntities);
+             
+             if (ownedEntities.length === 0) {
+                 empireGrid.innerHTML = `
+                     <div class="empty-empire">
+                         <div style="font-size: 3rem; margin-bottom: 10px;">🍑</div>
+                         <p>Start buying entities to build your empire!</p>
+                     </div>
+                 `;
+                 return;
+             }
+             
+             // Add owned entities to grid
+             ownedEntities.forEach(entity => {
+                 const itemElement = document.createElement('div');
+                 itemElement.className = 'empire-item';
+                 itemElement.innerHTML = `
+                     <div class="item-emoji">${entity.emoji}</div>
+                     <div class="item-name">${entity.name}</div>
+                     <div class="item-count">Owned: ${entity.owned}</div>
+                 `;
+                 empireGrid.appendChild(itemElement);
+             });
+         }
+
+         // Update compact empire view
+         function updateCompactEmpire(ownedEntities) {
+             const compactContainer = document.getElementById('empireCompact');
+             
+             if (ownedEntities.length === 0) {
+                 compactContainer.innerHTML = `
+                     <div class="compact-entity">
+                         <div class="compact-emoji">🍑</div>
+                         <div class="compact-count">0</div>
+                     </div>
+                 `;
+                 return;
+             }
+             
+             compactContainer.innerHTML = '';
+             ownedEntities.forEach(entity => {
+                 const compactElement = document.createElement('div');
+                 compactElement.className = 'compact-entity';
+                 compactElement.innerHTML = `
+                     <div class="compact-emoji">${entity.emoji}</div>
+                     <div class="compact-count">${entity.owned}</div>
+                 `;
+                 compactContainer.appendChild(compactElement);
+             });
+         }
         // Create floating notification
         function createNotification(x, y, text) {
             const notification = document.createElement('div');
@@ -1130,9 +1243,20 @@
                 updateDisplay();
             }
         }, 1000*refreshPeachRate);
-        // Initialize display
-        updateDisplay();
-        updateEmpire();
+                 // Initialize empire collapsible functionality
+         document.getElementById('empireHeader').addEventListener('click', () => {
+             const toggle = document.getElementById('empireToggle');
+             const content = document.getElementById('empireContent');
+             const compact = document.getElementById('empireCompact');
+             
+             toggle.classList.toggle('collapsed');
+             content.classList.toggle('collapsed');
+             compact.classList.toggle('visible');
+         });
+
+         // Initialize display
+         updateDisplay();
+         updateEmpire();
     </script>
 </body>
 </html>
