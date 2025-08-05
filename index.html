@@ -291,19 +291,28 @@
                backdrop-filter: blur(15px);
                border: 1px solid rgba(255, 170, 0, 0.3);
                border-radius: 20px;
-               padding: 30px;
+               padding: 0;
                max-width: 600px;
                width: 90%;
                max-height: 80vh;
-               overflow-y: auto;
                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
                position: relative;
                transform: scale(0.9);
                transition: transform 0.3s ease;
                /* Ensure scrollbar is contained within the popup */
                box-sizing: border-box;
-               /* Add padding for scrollbar space */
-               padding-right: 40px;
+               /* Direction for left scrollbar */
+               direction: rtl;
+               /* Ensure scrollbar respects border radius */
+               overflow: hidden;
+             }
+
+             .popup-inner {
+               padding: 30px;
+               padding-left: 40px;
+               max-height: 80vh;
+               overflow-y: auto;
+               height: 100%;
              }
 
             .popup.visible .popup-content {
@@ -338,6 +347,7 @@
                margin-bottom: 15px;
                text-align: center;
                font-weight: 700;
+               direction: ltr;
              }
 
              .popup h3 {
@@ -345,6 +355,7 @@
                font-size: 1.1rem;
                margin: 20px 0 10px 0;
                font-weight: 600;
+               direction: ltr;
              }
 
              .popup p {
@@ -352,12 +363,14 @@
                font-size: 0.9rem;
                line-height: 1.5;
                margin: 8px 0;
+               direction: ltr;
              }
 
              .popup ul {
                list-style: disc;
                padding-left: 20px;
                margin: 10px 0;
+               direction: ltr;
              }
 
              .popup li {
@@ -366,6 +379,7 @@
                line-height: 1.4;
                color: #fff;
                border: none;
+               direction: ltr;
              }
 
              .popup li:hover {
@@ -429,36 +443,36 @@
                padding: 20px;
              }
 
-                         /* Custom scrollbar for the popup content */
-             .popup-content::-webkit-scrollbar {
+                         /* Custom scrollbar for the popup inner content */
+             .popup-inner::-webkit-scrollbar {
                width: 6px;
              }
 
-             .popup-content::-webkit-scrollbar-track {
+             .popup-inner::-webkit-scrollbar-track {
                background: transparent;
                border-radius: 3px;
-               margin: 15px 0;
+               margin: 20px 0;
              }
 
-             .popup-content::-webkit-scrollbar-thumb {
+             .popup-inner::-webkit-scrollbar-thumb {
                background: rgba(255, 170, 0, 0.4);
                border-radius: 3px;
                border: 1px solid rgba(255, 170, 0, 0.1);
-               min-height: 40px;
+               min-height: 30px;
                margin: 0 2px;
              }
 
-             .popup-content::-webkit-scrollbar-thumb:hover {
+             .popup-inner::-webkit-scrollbar-thumb:hover {
                background: rgba(255, 170, 0, 0.6);
              }
 
              /* Hide scrollbar buttons/arrows */
-             .popup-content::-webkit-scrollbar-button {
+             .popup-inner::-webkit-scrollbar-button {
                display: none;
              }
 
              /* Firefox scrollbar */
-             .popup-content {
+             .popup-inner {
                scrollbar-width: thin;
                scrollbar-color: rgba(255, 170, 0, 0.4) transparent;
              }
@@ -671,16 +685,18 @@
                     <button id="redeemCodeBtn" title="Redeem Code">🎁</button>
                   </div>
 
-                                     <!-- Update log popup -->
-                   <div id="updatePopup" class="popup">
-                     <div class="popup-content">
-                       <button id="closeUpdatePopup" class="close">&times;</button>
-                       <div id="updateContent">
-                         <h2>📜 Update Log</h2>
-                         <div class="loading">Loading updates...</div>
+                                                          <!-- Update log popup -->
+                     <div id="updatePopup" class="popup">
+                       <div class="popup-content">
+                         <button id="closeUpdatePopup" class="close">&times;</button>
+                         <div class="popup-inner">
+                           <div id="updateContent">
+                             <h2>📜 Update Log</h2>
+                             <div class="loading">Loading updates...</div>
+                           </div>
+                         </div>
                        </div>
                      </div>
-                   </div>
       
     <div class="background-pattern"></div>
     <div class="container">
