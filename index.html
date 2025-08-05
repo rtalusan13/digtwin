@@ -83,18 +83,19 @@
             min-height: 70vh;
             padding: 20px 0;
         }
-                 .visuals-panel {
-             flex: 1;
-             min-width: 300px;
-             max-width: 400px;
-             background: rgba(30, 30, 46, 0.3);
-             backdrop-filter: blur(10px);
-             border: 1px solid rgba(128, 128, 128, 0.3);
-             border-radius: 20px;
-             padding: 25px;
-             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-             transition: all 0.3s ease;
-         }
+                           .visuals-panel {
+              flex: 1;
+              min-width: 300px;
+              max-width: 400px;
+              width: 350px;
+              background: rgba(30, 30, 46, 0.3);
+              backdrop-filter: blur(10px);
+              border: 1px solid rgba(128, 128, 128, 0.3);
+              border-radius: 20px;
+              padding: 25px;
+              box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+              transition: all 0.3s ease;
+          }
 
          .empire-header {
              display: flex;
@@ -124,6 +125,7 @@
               max-height: 0;
               overflow: hidden;
               transition: max-height 0.3s ease;
+              width: 100%;
           }
 
           .empire-content.expanded {
@@ -137,6 +139,7 @@
               justify-content: center;
               align-items: center;
               padding: 15px 0;
+              width: 100%;
           }
 
           .empire-compact.hidden {
@@ -168,11 +171,12 @@
             margin-bottom: 20px;
             font-weight: 600;
         }
-        .empire-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+                 .empire-grid {
+             display: grid;
+             grid-template-columns: repeat(2, 1fr);
+             gap: 15px;
+             width: 100%;
+         }
         .empire-item {
             background: rgba(50, 50, 70, 0.5);
             border: 1px solid rgba(128, 128, 128, 0.2);
