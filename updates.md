@@ -1,4 +1,8 @@
 # Updates & Patches
+
+## 8/5/25
+- Fixed bug where code prompter would halt peach updates in browser
+- Edited reward code panel to be an on-screen pop-up rather than being integrated through the browswer
 ## 8/4/25
 - Updated the update log visuals into a larger pop-up
 - Integrated updates.md file into index.html to use as the source of the update log text
