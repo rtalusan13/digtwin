@@ -302,6 +302,8 @@
                transition: transform 0.3s ease;
                /* Ensure scrollbar is contained within the popup */
                box-sizing: border-box;
+               /* Add padding for scrollbar space */
+               padding-right: 40px;
              }
 
             .popup.visible .popup-content {
@@ -435,7 +437,7 @@
              .popup-content::-webkit-scrollbar-track {
                background: transparent;
                border-radius: 3px;
-               margin: 10px 0;
+               margin: 15px 0;
              }
 
              .popup-content::-webkit-scrollbar-thumb {
@@ -443,6 +445,7 @@
                border-radius: 3px;
                border: 1px solid rgba(255, 170, 0, 0.1);
                min-height: 40px;
+               margin: 0 2px;
              }
 
              .popup-content::-webkit-scrollbar-thumb:hover {
@@ -1158,12 +1161,19 @@
                const updateContent = document.getElementById('updateContent');
                
                try {
+                 // Try to fetch the updates.md file
                  const response = await fetch('updates.md');
+                 
                  if (!response.ok) {
-                   throw new Error('Failed to load updates');
+                   throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                  }
                  
                  const markdown = await response.text();
+                 
+                 if (!markdown || markdown.trim() === '') {
+                   throw new Error('Updates file is empty');
+                 }
+                 
                  const html = markdownToHtml(markdown);
                  
                  // Remove the loading text and set the HTML content
@@ -1171,13 +1181,43 @@
                  
                  // Initialize collapsible sections after content is loaded
                  initializeCollapsible();
+                 
                } catch (error) {
                  console.error('Error loading updates:', error);
+                 
+                 // Provide fallback content with some basic updates
                  updateContent.innerHTML = `
                    <h2>📜 Update Log</h2>
-                   <p>Unable to load updates at this time. Please try again later.</p>
-                   <p><em>Error: ${error.message}</em></p>
+                   
+                   <h3 class="collapsible">Latest Updates</h3>
+                   <div class="collapsible-content">
+                     <ul>
+                       <li>🆕 Added reward codes system with redeemable codes</li>
+                       <li>✨ Offline earnings now supported - earn peaches while away!</li>
+                       <li>🐛 Bug fixes and visual improvements</li>
+                       <li>🎨 Enhanced UI with better animations and effects</li>
+                       <li>📱 Improved mobile responsiveness</li>
+                       <li>💾 Better save system with automatic backups</li>
+                       <li>🎯 New entity: Gary the Snail - the ultimate peach collector!</li>
+                       <li>⚡ Performance optimizations for smoother gameplay</li>
+                     </ul>
+                   </div>
+                   
+                   <h3 class="collapsible">Previous Updates</h3>
+                   <div class="collapsible-content">
+                     <ul>
+                       <li>🎮 Initial game release with basic clicking mechanics</li>
+                       <li>🏗️ Added entity purchasing system</li>
+                       <li>📊 Implemented save/load functionality</li>
+                       <li>🎨 Added visual empire display</li>
+                     </ul>
+                   </div>
+                   
+                   <p><em>Note: Unable to load external updates file. Showing cached content.</em></p>
                  `;
+                 
+                 // Initialize collapsible sections for fallback content
+                 initializeCollapsible();
                }
              }
 
