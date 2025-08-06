@@ -9,6 +9,7 @@
 - adding reset button
 - adding more charcters + scale balancing
 - upgrades/purchasable boosts
+- sound effects + mute button
 
 ## 8/5/25
 - Fixed bug where code prompter would halt peach updates in browser
