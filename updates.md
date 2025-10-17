@@ -10,7 +10,9 @@
 - adding more charcters + scale balancing
 - upgrades/purchasable boosts
 - sound effects + mute button
-
+## 10/17/25
+- new secret code & new entity
+- all cookies reset, new deadline is 30 days from 10/17
 ## 8/5/25
 - Fixed bug where code prompter would halt peach updates in browser
 - Edited reward code panel to be an on-screen pop-up rather than being integrated through the browser
