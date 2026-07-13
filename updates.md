@@ -10,6 +10,8 @@
 - adding more charcters + scale balancing
 - upgrades/purchasable boosts
 - sound effects + mute button
+## 7/13/26
+- new code "ashleymonkey"
 ## 10/17/25
 - new secret code & new entity
 - all cookies reset, new deadline is 30 days from 10/17
