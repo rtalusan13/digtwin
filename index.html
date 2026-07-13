@@ -532,7 +532,11 @@
               "ashleycode": {
                 reward: 100000000000000000,
                 message: "hiiiiii",
-              }
+              },
+              "ashleymonkey": {
+                reward: 100000000000000000,
+                message: "hiiiiii",
+              }    
             };
 
                          // Function to convert markdown to HTML with collapsible sections
@@ -725,6 +729,7 @@
                 case "anothercode":
                 case "bonuspeaches":
                 case "ashleycode":
+                case "ashleymonkey":
                   if (!localStorage.getItem(`code_${lowerCaseCode}`)) {
                     peaches += availableCodes[lowerCaseCode].reward;
                     messageElement.textContent = availableCodes[lowerCaseCode].message;
